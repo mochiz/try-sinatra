@@ -16,12 +16,17 @@ get '/memos' do
 end
 
 get '/memos/new' do
+  @memo = Memo.new({ id: '', title: '', body: '' })
+  erb :new
 end
 
 get '/memos/:id' do
 end
 
 post '/memos' do
+  @memo = Memo.new({ id: '', title: params[:title], body: params[:body] })
+  @memo.save
+  redirect("/memos/#{@memo.id}")
 end
 
 get '/memos/:id/edit' do
