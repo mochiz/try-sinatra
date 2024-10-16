@@ -13,7 +13,7 @@ class Memo
   end
 
   def save
-    if @id.empty?
+    if @id == ''
       create
     else
       update
