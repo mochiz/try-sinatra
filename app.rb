@@ -3,10 +3,16 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+require_relative 'models/memo'
+
 get '/' do
+  @memos = Memo.all
+  erb :index
 end
 
 get '/memos' do
+  @memos = Memo.all
+  erb :index
 end
 
 get '/memos/new' do
