@@ -33,9 +33,16 @@ post '/memos' do
 end
 
 get '/memos/:id/edit' do
+  @memo = Memo.find(params[:id].to_i)
+  erb :edit
 end
 
 patch '/memos/:id' do
+  @memo = Memo.find(params[:id].to_i)
+  @memo.title = params[:title]
+  @memo.body = params[:body]
+  @memo.save
+  redirect("/memos/#{@memo.id}")
 end
 
 delete '/memos/:id' do
