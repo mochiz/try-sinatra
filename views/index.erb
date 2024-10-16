@@ -9,18 +9,20 @@
     <article>
       <header>
         <h1>メモアプリ</h1>
-        <div class="button">
-          <a href="/memos/new">追加</a>
-        </div>
       </header>
       <section>
-      <ul>
-        <% @memos.each do |memo| %>
-          <li>
-            <a href='<%= "/memos/#{memo.id}" %>'> <%= memo.title %></a>
-          </li>
-        <% end %>
-      </ul>
+        <ul>
+          <% @memos.each do |memo| %>
+            <li>
+              <a href='<%= "/memos/#{memo.id}" %>'> <%= memo.title %></a>
+            </li>
+          <% end %>
+        </ul>
+        <div class="new-button-container">
+          <div class="button">
+            <a href="/memos/new">追加</a>
+          </div>
+        </div>
       </section>
     </article>
   </body>

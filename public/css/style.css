@@ -220,7 +220,7 @@ ul > li::before {
   font-weight: bold;
 }
 
-.container {
+.container form {
   width: 680px;
   margin-inline: auto;
   display: flex;
@@ -261,6 +261,7 @@ ul > li::before {
 .form-action {
   display: flex;
   justify-content: center;
+  margin: 16px;
 }
 
 input[type="submit"] {
@@ -294,4 +295,9 @@ input[type="submit"] {
   height: 40px;
   border: solid 1px #4397de;
   border-radius: 8px;
+}
+
+.new-button-container {
+  display: flex;
+  justify-content: right;
 }
