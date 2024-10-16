@@ -46,6 +46,9 @@ patch '/memos/:id' do
 end
 
 delete '/memos/:id' do
+  @memo = Memo.find(params[:id].to_i)
+  @memo.destroy
+  redirect('/memos')
 end
 
 not_found do
