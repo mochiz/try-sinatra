@@ -21,6 +21,9 @@ get '/memos/new' do
 end
 
 get '/memos/:id' do
+  @memo = Memo.find(params[:id].to_i)
+  redirect('/memos') unless @memo
+  erb :show
 end
 
 post '/memos' do
