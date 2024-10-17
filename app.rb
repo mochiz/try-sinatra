@@ -5,6 +5,11 @@ require 'sinatra/reloader'
 
 require_relative 'models/memo'
 
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+end
+
 get '/' do
   @memos = Memo.all
   erb :index
