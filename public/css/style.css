@@ -296,8 +296,3 @@ input[type="submit"] {
   border: solid 1px #4397de;
   border-radius: 8px;
 }
-
-.new-button-container {
-  display: flex;
-  justify-content: right;
-}
