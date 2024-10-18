@@ -13,10 +13,17 @@ $ cd try-sinatra
 $ bundle
 ```
 
-メモを保存するための json ファイルを準備する
+環境変数に postgresql の user, password を設定してください
 
 ```sh
-$ echo '[]' > data/memos.json
+export PG_USER=XXXX
+export PG_PASSWORD=XXXX
+```
+
+DB をセットアップする。
+
+```sh
+$ rake db:create
 ```
 
 アプリを起動する
@@ -26,3 +33,11 @@ $ bundle exec ruby app.rb
 ```
 
 http://localhost:4567/ でメモアプリを表示できること
+
+## その他
+
+不要になった DB は db:drop コマンドで削除してください
+
+```sh
+$ rake db:drop
+```
