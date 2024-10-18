@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require_relative '../lib/db'
 
 #  Memo
 class Memo
@@ -14,54 +14,26 @@ class Memo
 
   def save
     if @id == ''
-      create
+      result = sql('INSERT INTO memos (title, body) VALUES ($1, $2) RETURNING id', @title, @body)
+      @id = result[0]['id']
     else
-      update
+      sql('UPDATE memos SET title = $1, body = $2 WHERE id = $3', @title, @body, @id)
     end
   end
 
   def destroy
-    current_memos = self.class.all
-    new_memos = current_memos.reject { |memo| memo.id == id }
-    self.class.save(new_memos)
-  end
-
-  private
-
-  def create
-    current_memos = self.class.all
-    @id = current_memos.map(&:id).max.to_i + 1
-    new_memos = current_memos.push(self)
-    self.class.save(new_memos)
-  end
-
-  def update
-    current_memos = self.class.all
-    new_memos = current_memos.map do |memo|
-      if memo.id == @id
-        memo.title = @title
-        memo.body = @body
-      end
-      memo
-    end
-    self.class.save(new_memos)
+    sql('DELETE FROM memos WHERE id = $1', @id)
   end
 
   class << self
     def find(id)
-      all.find { |memo| memo.id == id }
+      memo_data = sql('SELECT * FROM memos WHERE id = $1 LIMIT 1', id).first
+      new(id: memo_data['id'], title: memo_data['title'], body: memo_data['body'])
     end
 
     def all
-      file = File.read('./data/memos.json')
-      memos_json = JSON.parse(file, symbolize_names: true)
-      memos_json.map { |params| new(params) }
-    end
-
-    def save(memos)
-      memos_json = memos.map { |memo| { id: memo.id, title: memo.title, body: memo.body } }
-      File.open('./data/memos.json', 'w') do |file|
-        file.puts JSON.pretty_generate(memos_json)
+      sql('SELECT * FROM memos ORDER BY id').map do |memo_data|
+        new(id: memo_data['id'], title: memo_data['title'], body: memo_data['body'])
       end
     end
   end
