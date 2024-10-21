@@ -20,6 +20,14 @@ class Memo
     end
   end
 
+  def destroy
+    current_memos = self.class.all
+    new_memos = current_memos.reject { |memo| memo.id == id }
+    self.class.save(new_memos)
+  end
+
+  private
+
   def create
     current_memos = self.class.all
     @id = current_memos.map(&:id).max.to_i + 1
@@ -36,12 +44,6 @@ class Memo
       end
       memo
     end
-    self.class.save(new_memos)
-  end
-
-  def destroy
-    current_memos = self.class.all
-    new_memos = current_memos.reject { |memo| memo.id == id }
     self.class.save(new_memos)
   end
 
