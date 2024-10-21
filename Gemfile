@@ -7,9 +7,3 @@ gem 'sinatra-reloader'
 
 gem 'puma'
 gem 'rackup'
-
-group :development do
-  gem 'erb_lint'
-  gem 'rexml'
-  gem 'rubocop-fjord'
-end
