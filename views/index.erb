@@ -1,29 +1,19 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <title>メモアプリ</title>
-    <link rel="stylesheet" href="/css/style.css" type="text/css" media="all">
-  </head>
-  <body>
-    <article>
-      <header>
-        <h1>メモアプリ</h1>
-      </header>
-      <section>
-        <ul>
-          <% @memos.each do |memo| %>
-            <li>
-              <a href='<%= "/memos/#{memo.id}" %>'> <%= h memo.title %></a>
-            </li>
-          <% end %>
-        </ul>
-        <div class="buttons">
-          <div class="button">
-            <a href="/memos/new">追加</a>
-          </div>
-        </div>
-      </section>
-    </article>
-  </body>
-</html>
+<article>
+  <header>
+    <h1>メモアプリ</h1>
+  </header>
+  <section>
+    <ul>
+      <% @memos.each do |memo| %>
+        <li>
+          <a href='<%= "/memos/#{memo.id}" %>'> <%= h memo.title %></a>
+        </li>
+      <% end %>
+    </ul>
+    <div class="buttons">
+      <div class="button">
+        <a href="/memos/new">追加</a>
+      </div>
+    </div>
+  </section>
+</article>
