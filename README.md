@@ -16,7 +16,7 @@ $ bundle
 メモを保存するための json ファイルを準備する
 
 ```sh
-$ cp data/memos_seed.json data/memos.json
+$ echo '[]' > data/memos.json
 ```
 
 アプリを起動する
