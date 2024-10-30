@@ -1,0 +1,22 @@
+<article>
+  <header>
+    <h1>メモアプリ</h1>
+  </header>
+  <section>
+    <h2><%= h @memo.title %></h2>
+    <p><%= h @memo.body %></p>
+  </section>
+  <section>
+    <div class="buttons">
+      <div class="button">
+        <a href='<%= "/memos/#{@memo.id}/edit" %>'>変更</a>
+      </div>
+      <form action='<%= "/memos/#{@memo.id}" %>' method="POST">
+        <div class="button">
+          <input id="hidden" type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="削除">
+        </div>
+      </form>
+    </div>
+  </section>
+</article>
