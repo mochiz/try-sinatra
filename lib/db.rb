@@ -2,13 +2,16 @@
 
 require 'pg'
 
-def sql(cmd, *args)
+def setup_connection
   opts = {
     'user' => ENV['PG_USER'] || 'postgres',
     'password' => ENV['PG_PASSWORD'] || 'password',
     'dbname' => 'memo_app'
   }
+  PG::Connection.new(opts)
+end
 
-  $connection ||= PG::Connection.new(opts) # rubocop:disable Style/GlobalVars
-  $connection.exec(cmd, args) # rubocop:disable Style/GlobalVars
+def sql(cmd, *args)
+  @connection ||= setup_connection
+  @connection.exec(cmd, args)
 end
