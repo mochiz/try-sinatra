@@ -2,7 +2,9 @@
 
 require 'pg'
 
-def setup_connection(dbname: 'memo_app')
+DB_NAME = 'memo_app'
+
+def setup_connection(dbname: DB_NAME)
   opts = {
     'user' => ENV['PG_USER'] || 'postgres',
     'password' => ENV['PG_PASSWORD'] || 'password',
@@ -18,7 +20,7 @@ end
 
 def create_database
   connection = setup_connection(dbname: 'postgres')
-  connection.exec('CREATE DATABASE memo_app')
+  connection.exec("CREATE DATABASE #{DB_NAME}")
 end
 
 def create_table
@@ -28,6 +30,6 @@ end
 
 def drop_database
   connection = setup_connection(dbname: 'postgres')
-  connection.exec('DROP DATABASE memo_app')
+  connection.exec("DROP DATABASE #{DB_NAME}")
 end
 
